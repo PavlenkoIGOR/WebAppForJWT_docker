@@ -11,6 +11,8 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+# Установите переменную окружения для времени ожидания
+ENV NUGET_HTTP_TIMEOUT=480 # Установите время ожидания в 300 секунд (5 минут)
 COPY ["WebAppForJWT/WebAppForJWT.csproj", "WebAppForJWT/"]
 RUN dotnet restore "./WebAppForJWT/WebAppForJWT.csproj"
 COPY . .
